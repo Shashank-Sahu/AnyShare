@@ -1,0 +1,42 @@
+<%- include("header") -%>
+
+<div class="container-fluid">
+    <div class="row intro">
+        <div class="col-lg-6 col-12">
+            <h1>Welcome to AnyShare</h1>
+            <p>This is a site where you can anything, may it be a thought, quote, code and just about anything. Just go
+                to share page and start writing and start sharing.</p>
+        </div>
+    </div>
+</div>
+<div class="container-fluid shares">
+    <% for( let index = 0; index < content.length; index++ ) { %>
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-4 col-12">
+                <h2>
+                    <a class="blog-title-link"
+                        href="/any-share/<%= content[index].heading %>"><%= content[index].heading %>
+                    </a>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <% if (content[index].infoText.length>1000) { %>
+                <p>
+                    <%= content[index].infoText.substring(1,1000) + "..." %>
+                    <a href="/any-share/<%= content[index].heading %> ">Read More</a>
+                    <% } else { %>
+                </p>
+
+                <p><%= content[index].infoText %></p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>
+
+
+<%- include("footer") -%>

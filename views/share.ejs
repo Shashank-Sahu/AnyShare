@@ -1,0 +1,30 @@
+<%- include("header") -%>
+
+<div class="shares">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <h2>Share</h2>
+                <p>Try to Keep the content clean/kid-friendly or the request will be
+                    rejected</p>
+            </div>
+        </div>
+        <form class="share-form" action="/share" method="POST">
+            <div class="col-lg-2 col-12 heading">
+                <label for="heading">Heading:</label>
+            </div>
+            <div class="col-12">
+                <input type="text" class="form-control heading-text" id="heading" name="heading" autocomplete="off">
+            </div>
+            <div class="col-lg-2 col-12 info">
+                <label for="infoText">Info:</label>
+            </div>
+            <div class="col-lg-6 col-12">
+                <textarea class="form-control info-text" id="infoText" rows="10" name="infoText"></textarea>
+                <button type="submit" class="btn btn-primary publish-btn">Request</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- include("footer") -%>

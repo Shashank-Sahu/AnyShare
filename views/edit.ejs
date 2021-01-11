@@ -1,0 +1,31 @@
+<%- include("header") -%>
+
+<div class="container-fluid shares">
+    <% for( let index = 0; index < content.length; index++ ) { %>
+    <div class="row">
+        <div class="col-lg-4 col-12">
+            <h2>
+                <a class="blog-title-link" href="/blog/<%= content[index].heading %> "><%= content[index].heading %>
+                </a>
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p><%= content[index].infoText %>
+                <form class="delete" action="/processing" method="POST">
+                    <% if (link==="requests") { %>
+                    <button class="acpt-btn" name="acpt_id" value=<%= content[index]._id %>><i
+                            class="fas fa-check"></i></button>
+                    <% } %>
+                    <button class="dlt-btn" name="dlt_id" value=<%= content[index]._id %>><i
+                            class="far fa-trash-alt"></i></button>
+                    <input type="hidden" name="link" value="<%= link %>">
+                </form>
+            </p>
+        </div>
+    </div>
+    <% } %>
+</div>
+
+<%- include("footer") -%>

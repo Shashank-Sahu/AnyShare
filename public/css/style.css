@@ -1,0 +1,188 @@
+/****************************HTML Tags****************************/
+
+body {
+    background-color: rgb(13, 64, 77);
+    background-image: url("https://www.transparenttextures.com/patterns/bedge-grunge.png");
+    color: rgb(218, 218, 218);
+}
+
+footer {
+    padding-bottom: 0;
+    text-align: center;
+    padding: 20px;
+    background-color: #15353d;
+}
+
+
+
+h1 {
+    font-size: 3rem;
+}
+
+h1,
+p {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+h2 {
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+}
+
+button {
+    border: none;
+    background-color: rgb(22, 48, 70);
+    background-image: url("https://www.transparenttextures.com/patterns/black-linen.png");
+    color: rgb(218, 218, 218);
+}
+
+button:focus {
+    outline: none;
+}
+
+
+a,
+a:hover {
+    color: rgb(218, 218, 218);
+    text-decoration: none;
+}
+
+/****************************Class Tags****************************/
+
+.intro {
+    background-color: rgb(31, 53, 73);
+    background-image: url("https://www.transparenttextures.com/patterns/brushed-alum.png");
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.shares {
+    background-color: rgb(22, 48, 70);
+    background-image: url("https://www.transparenttextures.com/patterns/black-linen.png");
+    padding-top: 50px;
+
+    min-height: 800px;
+}
+
+.content {
+    padding-bottom: 50px;
+}
+
+.pass-heading {
+    text-align: center;
+}
+
+.admin {
+    text-align: center;
+}
+
+.navbar {
+    background-color: #15353d;
+    padding: 10px;
+    box-shadow: -1px 0.1px 10px black;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.submit-btn {
+    margin: auto;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.navbar-nav {
+    margin-left: auto;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    margin: auto 20px;
+}
+
+.blog-title-link:hover {
+    text-decoration: none;
+}
+
+.info-text {
+    height: 300px;
+    resize: none;
+}
+
+.heading-text {
+    width: 200px;
+}
+
+.heading,
+.info {
+    text-align: left;
+}
+
+.share-form {
+    margin-left: 50px;
+    padding-top: 30px;
+}
+
+.publish-btn {
+    margin-top: 10px;
+}
+
+.delete {
+    display: inline;
+    margin-left: 50px;
+}
+
+.dlt-btn {
+    color: rgb(156, 33, 33);
+}
+
+.acpt-btn {
+    color: green;
+}
+
+.dlt-btn:focus {
+    outline: none;
+}
+
+.pass-form {
+    margin: auto;
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+/****************************Media Query****************************/
+
+@media (max-width: 991px) {
+
+    .heading-text,
+    .info-text {
+        margin: auto;
+    }
+
+    .heading,
+    .info,
+    .share-form {
+        text-align: center;
+    }
+}
+
+@media(max-width: 765px) {
+
+    h1,
+    h2,
+    p {
+        margin: auto;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .share-form,
+    .shares {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
