@@ -21,12 +21,13 @@ app.use(passport.session());
 
 /////////////////////////////////////DataBase Handling////////////////////////////////////
 
-mongoose.connect("mongodb://localhost:27017/BlogDB", {
+mongoose.connect("mongodb+srv://shashank-sahu:" + process.env.DBPASS + "@anysharecluster.mzf7l.mongodb.net/AnyShareDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false
 });
 
-const blogsSchema = new mongoose.Schema({
+const shareSchema = new mongoose.Schema({
     heading: {
         type: String,
         required: true,
@@ -45,8 +46,8 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(passportLocalMongoose);
 
-const Blogs = new mongoose.model("Blog", blogsSchema);
-const RequestBlog = new mongoose.model("Request", blogsSchema);
+const Shares = new mongoose.model("Share", shareSchema);
+const RequestShare = new mongoose.model("Request", shareSchema);
 const User = new mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
@@ -61,21 +62,22 @@ app.get("/", function (req, res) {
 });
 
 app.get("/any-share", function (req, res) {
-    Blogs.find({}, function (err, data) {
+    Shares.find({}, function (err, data) {
         res.render("any-share", { content: data });
     });
 });
 
 app.get("/share", function (req, res) {
-    res.render("share");
-
+    RequestShare.find({}, function (err, docs) {
+        res.render("share", { document: docs });
+    });
 });
 
 app.get("/any-share/:titleUrl", function (req, res) {
 
     const title = _.lowerCase(req.params.titleUrl);
 
-    Blogs.find({}, function (err, data) {
+    Shares.find({}, function (err, data) {
         data.forEach(function (blog) {
             const heading = _.lowerCase(blog.heading);
             if (title === heading) {
@@ -102,7 +104,7 @@ app.route("/admin")
 
 app.get("/admin/requests", function (req, res) {
     if (req.isAuthenticated()) {
-        RequestBlog.find({}, function (err, data) {
+        RequestShare.find({}, function (err, data) {
             res.render("edit", { content: data, link: "requests" });
         });
     }
@@ -112,7 +114,7 @@ app.get("/admin/requests", function (req, res) {
 
 app.get("/admin/edit", function (req, res) {
     if (req.isAuthenticated()) {
-        Blogs.find({}, function (err, data) {
+        Shares.find({}, function (err, data) {
             res.render("edit", { content: data, link: "edit" });
         });
     }
@@ -145,7 +147,7 @@ app.route("/password").
 app.post("/share", function (req, res) {
     const contentHeading = req.body.heading;
     const contentInfoText = req.body.infoText;
-    const blog = new RequestBlog({
+    const blog = new RequestShare({
         heading: contentHeading,
         infoText: contentInfoText,
     });
@@ -158,7 +160,7 @@ app.post("/processing", function (req, res) {
     const acpt_id = req.body.acpt_id;
     const dlt_id = req.body.dlt_id;
     if (link === "edit") {
-        Blogs.findByIdAndRemove(dlt_id, function (err) {
+        Shares.findByIdAndRemove(dlt_id, function (err) {
             if (err)
                 console.log(err);
         });
@@ -166,18 +168,17 @@ app.post("/processing", function (req, res) {
     }
     else if (link === "requests") {
         if (dlt_id) {
-            console.log("what");
-            RequestBlog.findByIdAndRemove(dlt_id, function (err) {
+            RequestShare.findByIdAndRemove(dlt_id, function (err) {
                 if (err)
                     console.log(err);
             });
         }
         else if (acpt_id) {
-            RequestBlog.findById(acpt_id, function (err, acptBlog) {
-                const blog = new Blogs(acptBlog.toJSON());
+            RequestShare.findById(acpt_id, function (err, acptBlog) {
+                const blog = new Shares(acptBlog.toJSON());
                 blog.save();
             });
-            RequestBlog.findByIdAndRemove(acpt_id, function (err) {
+            RequestShare.findByIdAndRemove(acpt_id, function (err) {
                 if (err)
                     console.log(err);
             });
@@ -186,7 +187,7 @@ app.post("/processing", function (req, res) {
     }
 });
 
-app.listen(3000, function () {
+app.listen(process.env.PORT, function () {
     console.log("Server started at 3000");
 });
 

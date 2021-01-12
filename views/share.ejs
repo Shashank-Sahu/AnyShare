@@ -9,6 +9,7 @@
                     rejected</p>
             </div>
         </div>
+        <% if (document.length<50) { %>
         <form class="share-form" action="/share" method="POST">
             <div class="col-lg-2 col-12 heading">
                 <label for="heading">Heading:</label>
@@ -24,6 +25,11 @@
                 <button type="submit" class="btn btn-primary publish-btn">Request</button>
             </div>
         </form>
+        <% } else { %>
+        <p>As the site is handled by a single Admin, no more requests are being accepted until previous requests are
+            handled</p>
+        <% } %>
+
     </div>
 </div>
 
